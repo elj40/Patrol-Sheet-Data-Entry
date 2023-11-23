@@ -47,37 +47,38 @@ function getData(loc) {
             Nseula (Puku);;;;;;;;;;;;;;;;;;;;;;;;
             Numbu (Wildebeest);;;;;;;;;;;;;;;;;;;;;;;;
             Insha (Duiker);;;;;;;;;;;;;;;;;;;;;;;;
-             Khola (Sable);;;;;;;;;;;Kanga (Crested);;;;;;;;;;;;
-            Chinkoma (Klipspringer);;;;;;;;;;;Kanga (Helmeted);;;;;;;;;;;;;
-            Kafundo (Grysbuck);;;;;;;;;;;M'ng'omba;;;;;;;;;;;;;
+             Khola (Sable);;;;;;;;;;;Kanga (Crested);;;;;;;;;;
+            Chinkoma (Klipspringer);;;;;;;;;;;Kanga (Helmeted);;;;;;;;;;;
+            Kafundo (Grysbuck);;;;;;;;;;;M'ng'omba;;;;;;;;;;;
             Sanje (S. monkey);;;;;;;;;;;;;;;;;;;;;;;;
             Kolwe (Baboon);;;;;;;;;;;;;;;;;;;;;;;;
-            Cheta (V. monkey);;;;;;;;;;;;;;;Kandwe ;;;;;;;;;
-            Mwena (Crocodile);;;;;;;;;;;;;;;Kaingo;;;;;;;;;
-            Nungu (Porcupine);;;;;;;;;;;;;;;Kalamo;;;;;;;;;
-            Ngulube (Bushpig);;;;;;;;;;;;;;;Nimbulu;;;;;;;;;
-            Nkoka (Pangolin);;;;;;;;;;;;;;;Chimwi;;;;;;;;;
-            ;;;;;;;;;;;;;;;Fungofungo;;;;;;;;;
+            Cheta (V. monkey);;;;;;;;;;;;;;;Kandwe ;;;;;;;
+            Mwena (Crocodile);;;;;;;;;;;;;;;Kaingo;;;;;;;
+            Nungu (Porcupine);;;;;;;;;;;;;;;Kalamo;;;;;;;
+            Ngulube (Bushpig);;;;;;;;;;;;;;;Nimbulu;;;;;;;
+            Nkoka (Pangolin);;;;;;;;;;;;;;;Chimwi;;;;;;;
+            ;;;;;;;;;;;;;;;Fungofungo;;;;;;;
             ;;;;;;;;;;;;;;;;;;;;;;;;
-            Wayenda kuti lero?;;;;;;"* Species not on the list must be added in the open space or placed under the ""off-interest"" section";;;;;;;;;;;;;;;;;;
+            Wayenda kuti lero?;* Species not on the list must be added in the open space or placed under the "off-interest" section
             Date;;;;;;;;;;;;;;;;;;;;;;;;
-            1;;;;;;;;;;;;;;;;;;;;;;;;
-            2;;;;;;;;;;;;;;;;;;;;;;;;
-            3;;;;;;;;;;;;;;;;;;;;;;;;
-            4;;;;;;;;;;;;;;;;;;;;;;;;
-            5;;;;;;;;;;;;;;;;;;;;;;;;
-            6;;;;;;;;;;;;;;;;;;;;;;;;
-            7;;;;;;;;;;;;;;;;;;;;;;;;`; break;
+            <input type="text"class="cell-input" placeholder="1">;;;;;;;;;;;;;;;;;;;;;;;;
+            <input type="text"class="cell-input" placeholder="2">;;;;;;;;;;;;;;;;;;;;;;;;
+            <input type="text"class="cell-input" placeholder="3">;;;;;;;;;;;;;;;;;;;;;;;;
+            <input type="text"class="cell-input" placeholder="4">;;;;;;;;;;;;;;;;;;;;;;;;
+            <input type="text"class="cell-input" placeholder="5">;;;;;;;;;;;;;;;;;;;;;;;;
+            <input type="text"class="cell-input" placeholder="6">;;;;;;;;;;;;;;;;;;;;;;;;
+            <input type="text"class="cell-input" placeholder="7">;;;;;;;;;;;;;;;;;;;;;;;;`; break;
     }
 }
 
 function styleElement(el, style) {
-    console.log(style);
     if ('content' in style) el.innerHTML = style.content;
+    if ("attributes" in style) {
+        for (let key in style.attributes) {
+            el.setAttribute(key, style.attributes[key]);
+        }
+    }
     for (let key in style.style) {
         el.style[key] = style.style[key];
-        console.log(key, el.style[style.style[key]]);
     }
-
-    return el;
 }

@@ -18,14 +18,14 @@ function createTable(table,data,style) {
         for (let col of row) {
             let td = document.createElement("td");
 
+            console.log(col);
             if (col.length > 0) td.innerHTML = col;
-            else td.innerHTML = '<textarea></textarea>'
+            else td.innerHTML = '<input type="text"class="cell-input">'
 
-            console.log((c.toString()+r.toString()));
             //Style td
             if (r in style.rows) styleElement(td, style.rows[r]);
             if (c in style.cols) styleElement(td, style.cols[c]);
-            if ((c.toString()+r.toString()) in style.cells) styleElement(td, style.cells[(c.toString()+r.toString())]);
+            if ((c.toString()+"_"+r.toString()) in style.cells) styleElement(td, style.cells[(c.toString()+"_"+r.toString())]);
 
             tr.appendChild(td);
             c++;

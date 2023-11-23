@@ -58,9 +58,9 @@ td:focus-within {
 }
 
 
-textarea {
+.cell-input {
     width: 100%;
-    height: 100%;
+    height: 1.5em;
     resize: none;
     border: none;
     outline: none;
