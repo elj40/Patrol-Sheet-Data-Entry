@@ -1,4 +1,5 @@
-const back_table = document.getElementById("back")
+const back_table = document.getElementById("back");
+const front_table = document.getElementById("front");
 
 window.onload = ()=>{setup()}
 
@@ -8,7 +9,12 @@ function setup() {
     let parsed_data = parseCSV(data.content);
     createTable(back_table, parsed_data, data.style);
 
+    data = loadCSV("nyamvu_front");
+    parsed_data = parseCSV(data.content);
+    createTable(front_table,parsed_data, data.style);
+
     back_table.addEventListener("keydown", arrowTraverse);
+    front_table.addEventListener("keydown", arrowTraverse);
 }
 
 function createTable(table,data,style) {
@@ -18,7 +24,6 @@ function createTable(table,data,style) {
         for (let col of row) {
             let td = document.createElement("td");
 
-            console.log(col);
             if (col.length > 0) td.innerHTML = col;
             else td.innerHTML = '<input type="text"class="cell-input">'
 
@@ -51,13 +56,13 @@ function getCurrentPosition(e) {
 
 function arrowTraverse(e) {
 
-    if (e.keyCode>=37&&e.keyCode<=40||e.keyCode==13||e.keyCode==32) {
+    if (e.keyCode>=37&&e.keyCode<=40||e.keyCode==13) {
         let current = getCurrentPosition(document.activeElement);
 
         let next = {x: current.x, y: current.y}
         if (e.keyCode==37) next.x--;    //left
         if (e.keyCode==38) next.y--;    //top
-        if (e.keyCode==39||e.keyCode==13||e.keyCode==32) next.x++;    //right
+        if (e.keyCode==39||e.keyCode==13) next.x++;    //right
         if (e.keyCode==40) next.y++;    //down
 
 

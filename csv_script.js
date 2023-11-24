@@ -1,4 +1,4 @@
-function loadCSV(loc = "nyamvu") {
+function loadCSV(loc = "nyamvu_back") {
     let data =  {
         style: getDataStyle(loc),
         content: getData(loc)
@@ -15,16 +15,51 @@ function parseCSV(csv) {
     return data;
 }
 
+function stringifyCell(cell) {
+    let s = ""
+
+    s += cell.innerText;
+
+    for (let child in cell.children) {
+        if (child.nodeName == "INPUT") {
+            s+=child.valueOf;
+        }
+    }
+
+    if (cell.hasAttribute("colspan")) {
+        for (let i = 0; i < cell.getAttribute("colspan"); i++) {
+            s+=";";
+        }
+    }
+
+    s+=";";
+}
+
+function stringifyTable(table) {
+    let csv = ""
+    let rows = table.children;
+
+    for (let row of rows) {
+        for (let cell of row) {
+
+            csv += stringifyCell(cell);
+        }
+        csv[csv.length-1] = "\n";
+    }
+}
+
 function getDataStyle(loc) {
     switch (loc) {
-        case "nyamvu":
+        case "nyamvu_back":
             return nyamvuStyleBack();
+        case "nyamvu_front":
+            return nyamvuStyleFront();
     }
 }
 
 function getData(loc) {
     switch (loc) {
-        case "nyamvu": 
+        case "nyamvu_back": 
             return `Species;B;M;B;M;B;M;B;M;B;M;B;M;B;M;B;M;B;M;B;M;B;M;B;M
             ;;;;;;;;;;;;;;;;;;;;;;;;
             Mpala (Impala);;;;;;;;;;;;;;;;;;;;;;;;
@@ -68,6 +103,25 @@ function getData(loc) {
             <input type="text"class="cell-input" placeholder="5 dd-mm-yyyy">;;;;;;;;;;;;;;;;;;;;;;;;
             <input type="text"class="cell-input" placeholder="6 dd-mm-yyyy">;;;;;;;;;;;;;;;;;;;;;;;;
             <input type="text"class="cell-input" placeholder="7 dd-mm-yyyy">;;;;;;;;;;;;;;;;;;;;;;;;`; break;
+        
+        case "nyamvu_front":
+            return `Call sign:;;Name:;;Sheet no.;
+            Date;;;;;;
+            Scout names;;;;;;
+            ;;;;;;
+            ;;;;;;
+            ;;;;;;
+            ;;;;;;
+            ;;;;;;
+            M'vula?;<input type="text"class="cell-input">mm;<input type="text"class="cell-input">mm;<input type="text"class="cell-input">mm;<input type="text"class="cell-input">mm;<input type="text"class="cell-input">mm;<input type="text"class="cell-input">mm
+            Incident Report No.?;;;;;;
+            Nyama zina?;;;;;;
+            ;;;;;;
+            ;;;;;;
+            Nyama yafa?;;;;;;
+            ;;;;;;
+            ;;;;;;
+            `
     }
 }
 
