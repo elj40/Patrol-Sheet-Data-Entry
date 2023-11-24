@@ -61,13 +61,13 @@ function getData(loc) {
             ;;;;;;;;;;;;;;;;;;;;;;;;
             Wayenda kuti lero?;* Species not on the list must be added in the open space or placed under the "off-interest" section
             Date;;;;;;;;;;;;;;;;;;;;;;;;
-            <input type="text"class="cell-input" placeholder="1">;;;;;;;;;;;;;;;;;;;;;;;;
-            <input type="text"class="cell-input" placeholder="2">;;;;;;;;;;;;;;;;;;;;;;;;
-            <input type="text"class="cell-input" placeholder="3">;;;;;;;;;;;;;;;;;;;;;;;;
-            <input type="text"class="cell-input" placeholder="4">;;;;;;;;;;;;;;;;;;;;;;;;
-            <input type="text"class="cell-input" placeholder="5">;;;;;;;;;;;;;;;;;;;;;;;;
-            <input type="text"class="cell-input" placeholder="6">;;;;;;;;;;;;;;;;;;;;;;;;
-            <input type="text"class="cell-input" placeholder="7">;;;;;;;;;;;;;;;;;;;;;;;;`; break;
+            <input type="text"class="cell-input" placeholder="1 dd-mm-yyyy">;;;;;;;;;;;;;;;;;;;;;;;;
+            <input type="text"class="cell-input" placeholder="2 dd-mm-yyyy">;;;;;;;;;;;;;;;;;;;;;;;;
+            <input type="text"class="cell-input" placeholder="3 dd-mm-yyyy">;;;;;;;;;;;;;;;;;;;;;;;;
+            <input type="text"class="cell-input" placeholder="4 dd-mm-yyyy">;;;;;;;;;;;;;;;;;;;;;;;;
+            <input type="text"class="cell-input" placeholder="5 dd-mm-yyyy">;;;;;;;;;;;;;;;;;;;;;;;;
+            <input type="text"class="cell-input" placeholder="6 dd-mm-yyyy">;;;;;;;;;;;;;;;;;;;;;;;;
+            <input type="text"class="cell-input" placeholder="7 dd-mm-yyyy">;;;;;;;;;;;;;;;;;;;;;;;;`; break;
     }
 }
 

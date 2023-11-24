@@ -1,6 +1,10 @@
 function nyamvuStyleBack() {
     return {
-        rows: {},
+        rows: {
+            //33: {style: {borderBottom: "solid 2px black"}},
+            //33: {content: "", style: {border: "none", height: "1.5rem"}},
+            34: {style: { borderTop: "solid 2px black",borderBottom: "solid 2px black" , padding:"10px"}}
+        },
         cols: {
             0: {style: {width: "150px"}}
         },

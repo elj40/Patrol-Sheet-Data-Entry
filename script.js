@@ -51,13 +51,13 @@ function getCurrentPosition(e) {
 
 function arrowTraverse(e) {
 
-    if (e.keyCode>=37&&e.keyCode<=40||e.keyCode==13) {
+    if (e.keyCode>=37&&e.keyCode<=40||e.keyCode==13||e.keyCode==32) {
         let current = getCurrentPosition(document.activeElement);
 
         let next = {x: current.x, y: current.y}
         if (e.keyCode==37) next.x--;    //left
         if (e.keyCode==38) next.y--;    //top
-        if (e.keyCode==39||e.keyCode==13) next.x++;    //right
+        if (e.keyCode==39||e.keyCode==13||e.keyCode==32) next.x++;    //right
         if (e.keyCode==40) next.y++;    //down
 
 
