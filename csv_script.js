@@ -1,3 +1,31 @@
+function saveCSV() {
+    let front_data = stringifyTable(front_table);
+    download(front_data, "front_sheet.csv", "text/plain");
+
+    let back_data = stringifyTable(back_table);
+    download(back_data, "back_sheet.csv", "text/plain");
+
+}
+
+// Function to download data to a file
+function download(data, filename, type) {
+    var file = new Blob([data], {type: type});
+    if (window.navigator.msSaveOrOpenBlob) // IE10+
+        window.navigator.msSaveOrOpenBlob(file, filename);
+    else { // Others
+        var a = document.createElement("a"),
+                url = URL.createObjectURL(file);
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(function() {
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);  
+        }, 0); 
+    }
+}
+
 function loadCSV(loc = "nyamvu_back") {
     let data =  {
         style: getDataStyle(loc),
@@ -20,11 +48,7 @@ function stringifyCell(cell) {
 
     s += cell.innerText;
 
-    for (let child in cell.children) {
-        if (child.nodeName == "INPUT") {
-            s+=child.valueOf;
-        }
-    }
+   if (cell.firstChild.nodeName == "INPUT") s += cell.firstChild.value;
 
     if (cell.hasAttribute("colspan")) {
         for (let i = 0; i < cell.getAttribute("colspan"); i++) {
@@ -33,6 +57,8 @@ function stringifyCell(cell) {
     }
 
     s+=";";
+
+    return s;
 }
 
 function stringifyTable(table) {
@@ -40,12 +66,14 @@ function stringifyTable(table) {
     let rows = table.children;
 
     for (let row of rows) {
-        for (let cell of row) {
+        for (let cell of row.children) {
 
             csv += stringifyCell(cell);
         }
-        csv[csv.length-1] = "\n";
+        csv = csv.slice(0,-1) +  "\n";
     }
+
+    return csv;
 }
 
 function getDataStyle(loc) {

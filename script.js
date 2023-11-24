@@ -1,6 +1,8 @@
 const back_table = document.getElementById("back");
 const front_table = document.getElementById("front");
 
+const save_btn = document.getElementById("save");
+
 window.onload = ()=>{setup()}
 
 function setup() {
@@ -15,6 +17,8 @@ function setup() {
 
     back_table.addEventListener("keydown", arrowTraverse);
     front_table.addEventListener("keydown", arrowTraverse);
+
+    save_btn.addEventListener("click", saveCSV);
 }
 
 function createTable(table,data,style) {
