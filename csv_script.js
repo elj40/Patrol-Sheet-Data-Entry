@@ -1,10 +1,20 @@
 function saveCSV() {
+    //checkForErrors(front_table)
     let front_data = stringifyTable(front_table);
-    download(front_data, "front_sheet.csv", "text/plain");
+    //download(front_data, "front_sheet.csv", "text/plain");
 
     let back_data = stringifyTable(back_table);
-    download(back_data, "back_sheet.csv", "text/plain");
+    checkForBackErrors(back_data);
+    //download(back_data, "back_sheet.csv", "text/plain");
+}
 
+function checkForBackErrors(data) {
+    let csv = parseCSV(data);
+
+    console.log("Table length", csv);
+    //console.log(csv);
+    validate_patrol([1,1], [2,1], csv);
+    validate_back_dates([0,36],csv);
 }
 
 // Function to download data to a file
@@ -48,10 +58,12 @@ function stringifyCell(cell) {
 
     s += cell.innerText;
 
-   if (cell.firstChild.nodeName == "INPUT") s += cell.firstChild.value;
+    if (cell.firstElementChild) {
+        if (cell.firstElementChild.nodeName == "INPUT") s += cell.firstElementChild.value;
+    }
 
     if (cell.hasAttribute("colspan")) {
-        for (let i = 0; i < cell.getAttribute("colspan"); i++) {
+        for (let i = 0; i < cell.getAttribute("colspan")-1; i++) {
             s+=";";
         }
     }
@@ -72,6 +84,8 @@ function stringifyTable(table) {
         }
         csv = csv.slice(0,-1) +  "\n";
     }
+
+    csv = csv.slice(0,-1);
 
     return csv;
 }
