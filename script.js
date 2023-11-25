@@ -2,11 +2,25 @@ const back_table = document.getElementById("back");
 const front_table = document.getElementById("front");
 
 const save_btn = document.getElementById("save");
+const new_btn = document.getElementById("new");
 
 window.onload = ()=>{setup()}
 
 function setup() {
     console.log("Running")
+    createNewSheet();
+
+    back_table.addEventListener("keydown", arrowTraverse);
+    front_table.addEventListener("keydown", arrowTraverse);
+
+    save_btn.addEventListener("click", saveCSV);
+    new_btn.addEventListener("click", createNewSheet);
+}
+
+function createNewSheet() {
+    back_table.innerHTML = ""
+    front_table.innerHTML = ""
+
     let data = loadCSV();
     let parsed_data = parseCSV(data.content);
     createTable(back_table, parsed_data, data.style);
@@ -14,11 +28,6 @@ function setup() {
     data = loadCSV("nyamvu_front");
     parsed_data = parseCSV(data.content);
     createTable(front_table,parsed_data, data.style);
-
-    back_table.addEventListener("keydown", arrowTraverse);
-    front_table.addEventListener("keydown", arrowTraverse);
-
-    save_btn.addEventListener("click", saveCSV);
 }
 
 function createTable(table,data,style) {
@@ -29,6 +38,7 @@ function createTable(table,data,style) {
             let td = document.createElement("td");
 
             if (col.length > 0) td.innerHTML = col;
+            //else td.innerHTML = '<input type="text"class="cell-input" placeholder="'+c.toString()+'_'+r.toString()+'">'
             else td.innerHTML = '<input type="text"class="cell-input">'
 
             //Style td

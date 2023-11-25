@@ -1,20 +1,23 @@
 function saveCSV() {
     //checkForErrors(front_table)
     let front_data = stringifyTable(front_table);
-    //download(front_data, "front_sheet.csv", "text/plain");
+    checkForFrontErrors(front_data);
+    download(front_data, "front_sheet.csv", "text/plain");
 
     let back_data = stringifyTable(back_table);
     checkForBackErrors(back_data);
-    //download(back_data, "back_sheet.csv", "text/plain");
+    download(back_data, "back_sheet.csv", "text/plain");
 }
 
 function checkForBackErrors(data) {
     let csv = parseCSV(data);
-
-    console.log("Table length", csv);
-    //console.log(csv);
     validate_patrol([1,1], [2,1], csv);
     validate_back_dates([0,36],csv);
+}
+
+function checkForFrontErrors(data) {
+    let csv = parseCSV(data);
+    validate_front([1,0],csv);
 }
 
 // Function to download data to a file
@@ -150,11 +153,11 @@ function getData(loc) {
             return `Call sign:;;Name:;;Sheet no.;
             Date;;;;;;
             Scout names;;;;;;
-            ;;;;;;
-            ;;;;;;
-            ;;;;;;
-            ;;;;;;
-            ;;;;;;
+            <input type="text"class="cell-input">;;;;;;
+            <input type="text"class="cell-input">;;;;;;
+            <input type="text"class="cell-input">;;;;;;
+            <input type="text"class="cell-input">;;;;;;
+            <input type="text"class="cell-input">;;;;;;
             M'vula?;<input type="text"class="cell-input">mm;<input type="text"class="cell-input">mm;<input type="text"class="cell-input">mm;<input type="text"class="cell-input">mm;<input type="text"class="cell-input">mm;<input type="text"class="cell-input">mm
             Incident Report No.?;;;;;;
             Nyama zina?;;;;;;

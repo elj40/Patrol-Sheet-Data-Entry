@@ -3,7 +3,7 @@ const countRegex = /\d{1,}/;
 const dateRegex = /[0-3][0-9]-[0-1][0-9]-[0-9]{4}/;
 
 console.log("Rules are here")
-function validate_patrol(p, c, table) {
+function validate_patrol(p, c, table, tableEl=back_table) {
     if (c[1]>=34) return;
     let prev = table[p[1]][p[0]].toUpperCase().trim();
     let current = table[c[1]][c[0]].toUpperCase().trim();
@@ -30,7 +30,7 @@ function validate_patrol(p, c, table) {
     else validate_patrol([c[0],c[1]],[c[0]+1,c[1]],table);
 }
 
-function validate_back_dates(c, table, tableEl) {
+function validate_back_dates(c, table, tableEl=back_table) {
     try {
     if (c[1]>=table.length) return;
 
@@ -44,10 +44,10 @@ function validate_back_dates(c, table, tableEl) {
             return;
         }
     }else {
-        let prev = table[c[1]-1][c[0]].toUpperCase().trim();
+        let prev = table[c[1]][c[0]-1].toUpperCase().trim();
         if (prev.length==0&&current.length>0) {
             alert("Empty space found before " + cpos + "\nPlease enter a value");
-            tableEl.children[c[1]].children[c[0]].firstChildElement.focus();
+            focus_cell([c[0]-1,c[1]], tableEl);
             return;
         }
         if (!current.match(gridRegex)&&current.length>0) {
@@ -65,4 +65,33 @@ catch(err) {
     throw err;
 }
 
+}
+
+function validate_front(c, table, tableEl=front_table) {
+    let cpos = c.toString();
+    if (c[1]>=table.length) return;
+    try {
+
+
+    let current = table[c[1]][c[0]].toUpperCase().trim(); 
+    
+    if (c[1] == 1&&c[0]>=1) {
+        if (!current.match(dateRegex)&&!current.length==0) {
+            alert(current + " found at "+cpos+",\nDate expected as dd-mm-yyyy");
+            focus_cell(c,tableEl);
+        }
+    }
+
+    if (c[0] == table[c[1]].length-1) validate_front([0,c[1]+1],table,tableEl);
+    else validate_front([c[0]+1,c[1]],table,tableEl);
+
+    }catch (err) {
+        console.log(cpos)
+        throw err;
+    }
+}
+
+function focus_cell(p, table) {
+    let td = table.children[p[1]].children[p[0]];
+    td.firstChild.focus();
 }

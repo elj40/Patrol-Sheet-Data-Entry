@@ -1,9 +1,11 @@
-
+:root {
+    --faint-white: #f6f6f6
+}
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
@@ -12,7 +14,10 @@ body {
 
     min-height: 100vh;
 
-    background-color: rgb(209, 250, 250);
+    background: #f12711;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #f5af19, #f12711);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #f5af19, #f12711); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 }
 
 nav {
@@ -27,24 +32,39 @@ nav {
     position: fixed;
 }
 
+nav .logo {
+    max-height: 3rem;
+    border-radius: 5px;
+
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+nav button {
+    color: var(--faint-white);
+
+    border:none;
+    background-color: #f36f15;
+
+    padding:1rem;
+    border-radius: 5px;
+
+    cursor: pointer;
+}
+
 main {
     padding: 1rem;
 }
 
-main:first-child {
-    margin-top: 10rem;
-}
-
 .page {
     width: 100%;
-    background-color: white;
+    background-color: var(--faint-white);
     padding-top: 1px;
     padding-bottom: 1px;
     margin-top: 1rem;
 }
 
 .front {
-    margin-top: 3rem;
+    margin-top: 5rem;
 }
 
 
@@ -80,4 +100,5 @@ td:focus-within {
     border: none;
     outline: none;
     text-transform:uppercase;
+    background-color: transparent;
 }

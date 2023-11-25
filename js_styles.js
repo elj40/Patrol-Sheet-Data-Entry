@@ -25,7 +25,9 @@ function nyamvuStyleBack() {
 
 function nyamvuStyleFront(){
     return {
-        rows: {},
+        rows: {
+            0: {style: {borderBottom: "solid 1px black"}}
+        },
         cols: {},
         cells: {
             "4_0": {attributes: {colspan: 2}, style: {textAlign: "right"}}
