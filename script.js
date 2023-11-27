@@ -31,6 +31,8 @@ function createNewSheet() {
 }
 
 function createTable(table,data,style) {
+    let textRegex = /\w{3,}/;
+
     let r=0,c=0;
     for (let row of data) {
         let tr = document.createElement("tr");
@@ -45,6 +47,7 @@ function createTable(table,data,style) {
             if (r in style.rows) styleElement(td, style.rows[r]);
             if (c in style.cols) styleElement(td, style.cols[c]);
             if ((c.toString()+"_"+r.toString()) in style.cells) styleElement(td, style.cells[(c.toString()+"_"+r.toString())]);
+
 
             tr.appendChild(td);
             c++;

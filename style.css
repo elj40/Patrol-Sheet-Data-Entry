@@ -85,7 +85,11 @@ table {
 
 td {
     border: 1px solid lightgray;
-    padding-left: 5px;
+    /* padding-left: 5px; */
+}
+
+td:nth-child(1) {
+    padding: none;
 }
 
 td:focus-within {

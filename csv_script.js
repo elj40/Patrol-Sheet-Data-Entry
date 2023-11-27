@@ -1,23 +1,31 @@
 function saveCSV() {
     //checkForErrors(front_table)
     let front_data = stringifyTable(front_table);
-    checkForFrontErrors(front_data);
-    download(front_data, "front_sheet.csv", "text/plain");
+    let safe = checkForFrontErrors(front_data);
+
 
     let back_data = stringifyTable(back_table);
-    checkForBackErrors(back_data);
-    download(back_data, "back_sheet.csv", "text/plain");
+    safe = safe && checkForBackErrors(back_data);
+
+    console.log("Validation returned: ", safe);
+
+    console.log(front_data);
+    console.log(back_data);
+
+    if (safe) {
+        download(front_data, "front_sheet.csv", "text/plain");
+        download(back_data, "back_sheet.csv", "text/plain");
+    }
 }
 
 function checkForBackErrors(data) {
     let csv = parseCSV(data);
-    validate_patrol([1,1], [2,1], csv);
-    validate_back_dates([0,36],csv);
+    return validate_patrol([1,1], [2,1], csv) && validate_back_dates([0,36],csv);
 }
 
 function checkForFrontErrors(data) {
     let csv = parseCSV(data);
-    validate_front([1,0],csv);
+    return validate_front([1,0],csv);
 }
 
 // Function to download data to a file
@@ -57,9 +65,14 @@ function parseCSV(csv) {
 }
 
 function stringifyCell(cell) {
+    let bracketRegex = /\(.*\)/
     let s = ""
 
-    s += cell.innerText;
+    let text = cell.innerText.trim().match(bracketRegex);
+
+    if (text != null) s+= text[0].slice(1,-1);
+    else s+= cell.innerText;
+
 
     if (cell.firstElementChild) {
         if (cell.firstElementChild.nodeName == "INPUT") s += cell.firstElementChild.value;
@@ -103,6 +116,8 @@ function getDataStyle(loc) {
 }
 
 function getData(loc) {
+    let input = "<input type='text'class='cell-input'>";
+    let input_date = '<input type="text"class="cell-input" placeholder="mm/dd/yyyy">';
     switch (loc) {
         case "nyamvu_back": 
             return `Species;B;M;B;M;B;M;B;M;B;M;B;M;B;M;B;M;B;M;B;M;B;M;B;M
@@ -137,35 +152,35 @@ function getData(loc) {
             Nungu (Porcupine);;;;;;;;;;;;;;;Kalamo;;;;;;;
             Ngulube (Bushpig);;;;;;;;;;;;;;;Nimbulu;;;;;;;
             Nkoka (Pangolin);;;;;;;;;;;;;;;Chimwi;;;;;;;
-            ;;;;;;;;;;;;;;;Fungofungo;;;;;;;
+            Hartebeest;;;;;;;;;;;;;;;Fungofungo;;;;;;;
             ;;;;;;;;;;;;;;;;;;;;;;;;
             Wayenda kuti lero?;* Species not on the list must be added in the open space or placed under the "off-interest" section
             Date;;;;;;;;;;;;;;;;;;;;;;;;
-            <input type="text"class="cell-input" placeholder="1 dd-mm-yyyy">;;;;;;;;;;;;;;;;;;;;;;;;
-            <input type="text"class="cell-input" placeholder="2 dd-mm-yyyy">;;;;;;;;;;;;;;;;;;;;;;;;
-            <input type="text"class="cell-input" placeholder="3 dd-mm-yyyy">;;;;;;;;;;;;;;;;;;;;;;;;
-            <input type="text"class="cell-input" placeholder="4 dd-mm-yyyy">;;;;;;;;;;;;;;;;;;;;;;;;
-            <input type="text"class="cell-input" placeholder="5 dd-mm-yyyy">;;;;;;;;;;;;;;;;;;;;;;;;
-            <input type="text"class="cell-input" placeholder="6 dd-mm-yyyy">;;;;;;;;;;;;;;;;;;;;;;;;
-            <input type="text"class="cell-input" placeholder="7 dd-mm-yyyy">;;;;;;;;;;;;;;;;;;;;;;;;`; break;
+            ${input_date};;;;;;;;;;;;;;;;;;;;;;;;
+            ${input_date};;;;;;;;;;;;;;;;;;;;;;;;
+            ${input_date};;;;;;;;;;;;;;;;;;;;;;;;
+            ${input_date};;;;;;;;;;;;;;;;;;;;;;;;
+            ${input_date};;;;;;;;;;;;;;;;;;;;;;;;
+            ${input_date};;;;;;;;;;;;;;;;;;;;;;;;
+            ${input_date};;;;;;;;;;;;;;;;;;;;;;;;`; break;
         
         case "nyamvu_front":
             return `Call sign:;;Name:;;Sheet no.;
-            Date;;;;;;
-            Scout names;;;;;;
-            <input type="text"class="cell-input">;;;;;;
-            <input type="text"class="cell-input">;;;;;;
-            <input type="text"class="cell-input">;;;;;;
-            <input type="text"class="cell-input">;;;;;;
-            <input type="text"class="cell-input">;;;;;;
-            M'vula?;<input type="text"class="cell-input">mm;<input type="text"class="cell-input">mm;<input type="text"class="cell-input">mm;<input type="text"class="cell-input">mm;<input type="text"class="cell-input">mm;<input type="text"class="cell-input">mm
-            Incident Report No.?;;;;;;
-            Nyama zina?;;;;;;
-            ;;;;;;
-            ;;;;;;
-            Nyama yafa?;;;;;;
-            ;;;;;;
-            ;;;;;;
+            Date;${input_date};${input_date};${input_date};${input_date};${input_date};${input_date};${input_date}
+            Scout 1;;;;;;;
+            Scout 2;;;;;;;
+            Scout 3;;;;;;;
+            Scout 4;;;;;;;
+            Scout 5;;;;;;;
+            Scout 6;;;;;;;
+            M'vula?;${input}mm;${input}mm;${input}mm;${input}mm;${input}mm;${input}mm;${input}mm
+            Incident Report No.;;;;;;;
+            Nyama zina?;;;;;;;
+            ;;;;;;;
+            ;;;;;;;
+            Nyama yafa?;;;;;;;
+            ;;;;;;;
+            ;;;;;;;
             `
     }
 }
