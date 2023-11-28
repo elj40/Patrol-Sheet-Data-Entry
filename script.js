@@ -40,8 +40,8 @@ function createTable(table,data,style) {
             let td = document.createElement("td");
 
             if (col.length > 0) td.innerHTML = col;
-            //else td.innerHTML = '<input type="text"class="cell-input" placeholder="'+c.toString()+'_'+r.toString()+'">'
-            else td.innerHTML = '<input type="text"class="cell-input">'
+            else td.innerHTML = '<input type="text"class="cell-input" placeholder="'+c.toString()+'_'+r.toString()+'">'
+            //else td.innerHTML = '<input type="text"class="cell-input">'
 
             //Style td
             if (r in style.rows) styleElement(td, style.rows[r]);

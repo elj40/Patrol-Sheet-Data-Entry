@@ -12,10 +12,7 @@ function saveCSV() {
     console.log(front_data);
     console.log(back_data);
 
-    if (safe) {
-        download(front_data, "front_sheet.csv", "text/plain");
-        download(back_data, "back_sheet.csv", "text/plain");
-    }
+   // if (safe) createReports(front_data, back_data);
 }
 
 function checkForBackErrors(data) {
@@ -70,6 +67,12 @@ function stringifyCell(cell) {
 
     let text = cell.innerText.trim().match(bracketRegex);
 
+    if (cell.hasAttribute("colspan")) {
+        for (let i = 0; i < cell.getAttribute("colspan")-1; i++) {
+            s+=";";
+        }
+    }
+
     if (text != null) s+= text[0].slice(1,-1);
     else s+= cell.innerText;
 
@@ -78,11 +81,7 @@ function stringifyCell(cell) {
         if (cell.firstElementChild.nodeName == "INPUT") s += cell.firstElementChild.value;
     }
 
-    if (cell.hasAttribute("colspan")) {
-        for (let i = 0; i < cell.getAttribute("colspan")-1; i++) {
-            s+=";";
-        }
-    }
+    
 
     s+=";";
 
@@ -120,49 +119,49 @@ function getData(loc) {
     let input_date = '<input type="text"class="cell-input" placeholder="mm/dd/yyyy">';
     switch (loc) {
         case "nyamvu_back": 
-            return `Species;B;M;B;M;B;M;B;M;B;M;B;M;B;M;B;M;B;M;B;M;B;M;B;M
-            ;;;;;;;;;;;;;;;;;;;;;;;;
-            Mpala (Impala);;;;;;;;;;;;;;;;;;;;;;;;
-            ;;;;;;;;;;;;;;;;;;;;;;;;
-            Mphuluphulu (Kudu);;;;;;;;;;;;;;;;;;;;;;;;
-            ;;;;;;;;;;;;;;;;;;;;;;;;
-            Njovu (Elephant);;;;;;;;;;;;;;;;;;;;;;;;
-            Mvuu (Hippo);;;;;;;;;;;;;;;;;;;;;;;;
-            Njati (Buffalo);;;;;;;;;;;;;;;;;;;;;;;;
-            Chuzu (Waterbuck);;;;;;;;;;;;;;;;;;;;;;;;
-            Chiloko (Roan);;;;;;;;;;;;;;;;;;;;;;;;
-            ;;;;;;;;;;;;;;;;;;;;;;;;
-            Nyamalikiti (Giraffe);;;;;;;;;;;;;;;;;;;;;;;;
-            Munjili  (Warthog);;;;;;;;;;;;;;;;;;;;;;;;
-            ;;;;;;;;;;;;;;;;;;;;;;;;
-            Mbizi (Zebra);;;;;;;;;;;;;;;;;;;;;;;;
-            ;;;;;;;;;;;;;;;;;;;;;;;;
-            Nkhwani (Bushbuck);;;;;;;;;;;;;;;;;;;;;;;;
-            ;;;;;;;;;;;;;;;;;;;;;;;;
-            Nseula (Puku);;;;;;;;;;;;;;;;;;;;;;;;
-            Numbu (Wildebeest);;;;;;;;;;;;;;;;;;;;;;;;
-            Insha (Duiker);;;;;;;;;;;;;;;;;;;;;;;;
-             Khola (Sable);;;;;;;;;;;Kanga (Crested);;;;;;;;;;
-            Chinkoma (Klipspringer);;;;;;;;;;;Kanga (Helmeted);;;;;;;;;;;
-            Kafundo (Grysbuck);;;;;;;;;;;M'ng'omba;;;;;;;;;;;
-            Sanje (S. monkey);;;;;;;;;;;;;;;;;;;;;;;;
-            Kolwe (Baboon);;;;;;;;;;;;;;;;;;;;;;;;
-            Cheta (V. monkey);;;;;;;;;;;;;;;Kandwe ;;;;;;;
-            Mwena (Crocodile);;;;;;;;;;;;;;;Kaingo;;;;;;;
-            Nungu (Porcupine);;;;;;;;;;;;;;;Kalamo;;;;;;;
-            Ngulube (Bushpig);;;;;;;;;;;;;;;Nimbulu;;;;;;;
-            Nkoka (Pangolin);;;;;;;;;;;;;;;Chimwi;;;;;;;
-            Hartebeest;;;;;;;;;;;;;;;Fungofungo;;;;;;;
-            ;;;;;;;;;;;;;;;;;;;;;;;;
-            Wayenda kuti lero?;* Species not on the list must be added in the open space or placed under the "off-interest" section
-            Date;;;;;;;;;;;;;;;;;;;;;;;;
-            ${input_date};;;;;;;;;;;;;;;;;;;;;;;;
-            ${input_date};;;;;;;;;;;;;;;;;;;;;;;;
-            ${input_date};;;;;;;;;;;;;;;;;;;;;;;;
-            ${input_date};;;;;;;;;;;;;;;;;;;;;;;;
-            ${input_date};;;;;;;;;;;;;;;;;;;;;;;;
-            ${input_date};;;;;;;;;;;;;;;;;;;;;;;;
-            ${input_date};;;;;;;;;;;;;;;;;;;;;;;;`; break;
+            return `Species;B;M;B;M;B;M;B;M;B;M;B;M;B;M;B;M;B;M;B;M;B;M;B;M;B;M;B;M;B;M
+            Mpala (Impala);;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+            ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+            ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+            Mphuluphulu (Kudu);;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+            ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+            Njovu (Elephant);;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+            Mvuu (Hippo);;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+            Njati (Buffalo);;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+            Chuzu (Waterbuck);;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+            Chiloko (Roan);;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+            ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+            Nyamalikiti (Giraffe);;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+            Munjili  (Warthog);;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+            ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+            Mbizi (Zebra);;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+            ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+            Nkhwani (Bushbuck);;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+            ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+            Nseula (Puku);;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+            Numbu (Wildebeest);;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+            Insha (Duiker);;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+            Khola (Sable);;;;;;;;;;;;;;;;Kanga (Crested);;;;;;;;;;;;
+            Nkoka (Pangolin);;;;;;;;;;;;;;;;Kanga (Helmeted);;;;;;;;;;;;
+            Kafundo (Grysbuck);;;;;;;;;;;;;;;;M'ng'omba;;;;;;;;;;;;
+            Sanje (S. monkey);;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+            Kolwe (Baboon);;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+            Cheta (V. monkey);;;;;;;;;;;;;;;;;;;;Kandwe ;;;;;;;;
+            Mwena (Crocodile);;;;;;;;;;;;;;;;;;;;Kaingo;;;;;;;;
+            Nungu (Porcupine);;;;;;;;;;;;;;;;;;;;Kalamo;;;;;;;;
+            Ngulube (Bushpig);;;;;;;;;;;;;;;;;;;;Nimbulu;;;;;;;;
+            Chinkoma (Klipspringer);;;;;;;;;;;;;;;;;;;;Chimwi;;;;;;;;
+            Hartebeest;;;;;;;;;;;;;;;;;;;;Fungofungo;;;;;;;;
+            ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+            Wayenda kuti lero?;* Species not on the list must be added in the open space or placed under the "off-interest" section;;;;;;
+            Date;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+            ${input_date};;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+            ${input_date};;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+            ${input_date};;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+            ${input_date};;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+            ${input_date};;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+            ${input_date};;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+            ${input_date};;;;;;;;;;;;;;;;;;;;;;;;;;;;;;`; break;
         
         case "nyamvu_front":
             return `Call sign:;;Name:;;Sheet no.;

@@ -1,6 +1,7 @@
 const gridRegex = /[a-zA-Z][0-9]{1,}/;
 const countRegex = /\d{1,}/;
-const dateRegex = /[0-1][0-9]\/[0-3][0-9]\/[0-9]{4}/;
+const dateRegex = /[0-3][0-9]\/[0-3][0-9]\/[0-9]{4}/;
+const wordRegex = /\w{4,}/;
 
 console.log("Rules are here")
 function validate_patrol(p, c, table, tableEl = back_table) {
@@ -48,7 +49,7 @@ function validate_back_dates(c, table, tableEl = back_table) {
         //console.log(current, cpos, current.length);
         if (c[0] == 0) {
             if (!current.match(dateRegex) && !current.length == 0) {
-                alert(current + " found\n" + "Expected dd-mm-yyyy at " + cpos);
+                alert(current + " found\n" + "Expected mm/dd/yyyy at " + cpos);
                  return false;
             }
         } else {
@@ -85,7 +86,7 @@ function validate_front(c, table, tableEl = front_table) {
 
         if (c[1] == 1 && c[0] >= 1) {
             if (!current.match(dateRegex) && !current.length == 0) {
-                alert(current + " found at " + cpos + ",\nDate expected as dd/mm/yyyy");
+                alert(current + " found at " + cpos + ",\nDate expected as mm/dd/yyyy");
                 focus_cell(c, tableEl);
             }
         }

@@ -4,9 +4,11 @@ A template for scouts to easily and quickly type in patrol sheet data
 ## todo
 
 - [Format](#format) 
+- readjust fixed values to work with wider table
 
 ## completed
 
+- fix stringify table
 - Block download if check fails
 - Only store english name in tables
 - Validatinon fix
