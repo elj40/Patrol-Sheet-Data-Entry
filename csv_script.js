@@ -12,7 +12,7 @@ function saveCSV() {
     console.log(front_data);
     console.log(back_data);
 
-   // if (safe) createReports(front_data, back_data);
+    if (safe) createReports(front_data, back_data);
 }
 
 function checkForBackErrors(data) {
