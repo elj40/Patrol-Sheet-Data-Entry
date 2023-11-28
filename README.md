@@ -3,8 +3,7 @@ A template for scouts to easily and quickly type in patrol sheet data
 
 ## todo
 
-- [Format](#format) 
-- readjust fixed values to work with wider table
+
 
 ## completed
 
@@ -14,6 +13,8 @@ A template for scouts to easily and quickly type in patrol sheet data
 - Validatinon fix
 - Style first col
 - Make slasehes for dates
+- [Format](#format) 
+- readjust fixed values to work with wider table
 
 # format
 
