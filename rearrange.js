@@ -123,16 +123,16 @@ function getAnimalData(fp,bp) {
 
     species.push(getSpecieData(parseArea(bp,1,32,50,1)));  //hartebeest
 
-    species.push(getSpecieData(parseArea(bp,17,22,50,1)));  //crested
+    species.push(getSpecieData(parseArea(bp,19,22,50,1)));  //crested
     species.push(getSpecieData(parseArea(bp,17,23,50,1)));  //helmeted
     species.push(getSpecieData(parseArea(bp,17,24,50,1)));  //mngomba
     
-    species.push(getSpecieData(parseArea(bp,21,27,50,1)));  //kandwe
-    species.push(getSpecieData(parseArea(bp,21,28,50,1)));  //kaingo
-    species.push(getSpecieData(parseArea(bp,21,29,50,1)));  //kalamo
-    species.push(getSpecieData(parseArea(bp,21,30,50,1)));  //nimbulu
-    species.push(getSpecieData(parseArea(bp,21,31,50,1)));  //chimwi
-    species.push(getSpecieData(parseArea(bp,21,32,50,1)));  //fungofungo
+    species.push(getSpecieData(parseArea(bp,23,27,50,1)));  //kandwe
+    species.push(getSpecieData(parseArea(bp,23,28,50,1)));  //kaingo
+    species.push(getSpecieData(parseArea(bp,23,29,50,1)));  //kalamo
+    species.push(getSpecieData(parseArea(bp,23,30,50,1)));  //nimbulu
+    species.push(getSpecieData(parseArea(bp,23,31,50,1)));  //chimwi
+    species.push(getSpecieData(parseArea(bp,23,32,50,1)));  //fungofungo
     
     return {dates: dates, sightings: species};
 }
@@ -231,6 +231,7 @@ function parseArea(table, x,y, sx, sy) {
         try {data.data.push(table[cy][cx]);}
         catch (err) {
             console.log(`Error on parsing: ${cx}, ${cy}`, table[cy][cx]);
+            alert(`Error on parsing: ${cx}, ${cy}`, table[cy][cx]);
             throw err;
         }
         

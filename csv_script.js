@@ -9,8 +9,8 @@ function saveCSV() {
 
     console.log("Validation returned: ", safe);
 
-    console.log(front_data);
-    console.log(back_data);
+    //console.log(front_data);
+    //console.log(back_data);
 
     if (safe) createReports(front_data, back_data);
 }
