@@ -3,26 +3,21 @@ A template for scouts to easily and quickly type in patrol sheet data
 
 ## todo
 
+- rearrange table to match actual sheets
+- connect dates from front to match patrol table
+    - ~~make the formatting of dates better~~
+- make moving around easier on the keyboard
+    - Enter should go the next animal
+    - Arrow keys should highlight all the text in the cell (tabindex or hack)
+- add search to quickly jump to an animal (/ key to start search?)
 
+- remove columns that appear in the middle
+- use a species list instead of loading a whole csv
+- find a way to add cells in case of overflow
+- add space for special species
+- split patrol table from animal table
+- improve docs for new users
+- merge validation and saving step into one
+- make entire styling system redundant
 
 ## completed
-
-- fix stringify table
-- Block download if check fails
-- Only store english name in tables
-- Validatinon fix
-- Style first col
-- Make slasehes for dates
-- [Format](#format) 
-- readjust fixed values to work with wider table
-
-# format
-
-**Animal report**
-Sheet_ID, Call_Sign, Person, Department-, ReportDate, GridCode,Species, Quantity, Status(default:Sighting)
-
-**Patrol Report**
-SheetIID, Call_Sign, patrolDate, numGridBlock(1), gridCode, patrolType(Foot patrol), Scout1, Scout2, Scout3, Scout4, Scout5, Scout6
-
-**Nytam yafa**
-Sheet_ID, ReportDate, GridCode, Species, Quantity, Reason, Person [top name]

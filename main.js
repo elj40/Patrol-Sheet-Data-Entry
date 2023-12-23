@@ -72,22 +72,59 @@ function getCurrentPosition(e) {
 }
 
 function arrowTraverse(e) {
-
-    if (e.keyCode>=37&&e.keyCode<=40||e.keyCode==13) {
         let current = getCurrentPosition(document.activeElement);
 
         let next = {x: current.x, y: current.y}
         if (e.keyCode==37) next.x--;    //left
         if (e.keyCode==38) next.y--;    //top
-        if (e.keyCode==39||e.keyCode==13) next.x++;    //right
+        if (e.keyCode==39) next.x++;    //right
         if (e.keyCode==40) next.y++;    //down
+	if (e.keyCode==13) next = next_x(current)
 
-
+	next_cell =current.table.children[next.y].children[next.x] 
+	
         //move focus to next cell
-        try {current.table.children[next.y].children[next.x].firstChild.focus();}
-        catch (TypeError) {}
+        try {
+		if (e.shiftKey)next_cell.firstChild.value = document.activeElement.value;
+		next_cell.firstChild.focus();
 
-    }
+	}
+        catch (TypeError) {}
 
 }
 
+function next_x(pos){
+	x=pos.x;y=pos.y;table=pos.table;
+	let ny = y+1
+	let nx = x
+	while (table.children[ny].children[nx].innerText.length < 5) {
+		nx--
+		if (nx<0) {
+			nx = 0
+			ny++
+		}
+	}
+	return {x: nx+1, y: ny}
+}
+ 
+function updateDates(el) {
+	let pos = getCurrentPosition(el)
+	let line = pos.table.children[pos.y].children
+	let date = el.value
+	for (let i = pos.x; i<line.length; i++) {
+		let a = i-pos.x 
+		
+		let [ month, day, year ] = date.split('/').map((x)=>parseInt(x))
+
+		if (day>31) {month++; day=1}
+		if (day<10) day="0"+day
+		if (month<10) month="0"+month
+		new_date = month+'/'+day+'/'+year
+
+		front_table.children[pos.y].children[i].firstChild.value=new_date
+		back_table.children[35+i].children[0].innerHTML= new_date
+		day++	
+		date = month+'/'+day+'/'+year
+
+	}
+}

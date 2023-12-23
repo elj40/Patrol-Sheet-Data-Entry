@@ -116,7 +116,7 @@ function getDataStyle(loc) {
 
 function getData(loc) {
     let input = "<input type='text'class='cell-input'>";
-    let input_date = '<input type="text"class="cell-input" placeholder="mm/dd/yyyy">';
+    let input_date = '<input type="text"class="cell-input" placeholder="mm/dd/yyyy" onchange="updateDates(this)">';
     switch (loc) {
         case "nyamvu_back": 
             return `Species;B;M;B;M;B;M;B;M;B;M;B;M;B;M;B;M;B;M;B;M;B;M;B;M;B;M;B;M;B;M
