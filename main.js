@@ -21,13 +21,13 @@ function createNewSheet() {
     back_table.innerHTML = ""
     front_table.innerHTML = ""
 
-    let data = loadCSV();
-    let parsed_data = parseCSV(data.content);
-    createTable(back_table, parsed_data, data.style);
+    let data = NYA_BACK_CSV;
+    let parsed_data = parseCSV(data);
+    createTable(back_table, parsed_data, NYA_BACK_STYLE);
 
-    data = loadCSV("nyamvu_front");
-    parsed_data = parseCSV(data.content);
-    createTable(front_table,parsed_data, data.style);
+    data = NYA_FRONT_CSV;
+    parsed_data = parseCSV(data);
+    createTable(front_table,parsed_data, NYA_FRONT_STYLE);
 }
 
 function createTable(table,data,style) {
@@ -127,4 +127,17 @@ function updateDates(el) {
 		date = month+'/'+day+'/'+year
 
 	}
+}
+
+
+function styleElement(el, style) {
+    if ('content' in style) el.innerHTML = style.content;
+    if ("attributes" in style) {
+        for (let key in style.attributes) {
+            el.setAttribute(key, style.attributes[key]);
+        }
+    }
+    for (let key in style.style) {
+        el.style[key] = style.style[key];
+    }
 }
