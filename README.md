@@ -7,7 +7,7 @@ A template for scouts to easily and quickly type in patrol sheet data
 - connect dates from front to match patrol table
     - ~~make the formatting of dates better~~
 - make moving around easier on the keyboard
-    - Enter should go the next animal
+    - ~~Enter should go the next animal~~
     - Arrow keys should highlight all the text in the cell (tabindex or hack)
 - add search to quickly jump to an animal (/ key to start search?)
 
