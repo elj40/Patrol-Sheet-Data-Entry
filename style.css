@@ -1,5 +1,5 @@
 :root {
-    --faint-white: #f6f6f6
+    --faint-white: #fbfbff
 }
 * {
     margin: 0;
@@ -25,11 +25,19 @@ nav {
     display: flex;
     background-color: white;
 
-    padding: 1rem;
+    /*padding: 1rem;*/
 
     justify-content: space-between;
 
     position: fixed;
+}
+
+nav .nav-section {
+	display: flex;
+	align-items: center;
+}
+nav .nav-section > * {
+	margin: 1rem;
 }
 
 nav .logo {
@@ -40,7 +48,7 @@ nav .logo {
 }
 
 nav h1 {
-    padding-top:1rem;
+  /*  padding-top:1rem;*/
 }
 
 nav button {
@@ -107,6 +115,6 @@ td:focus-within {
     resize: none;
     border: none;
     outline: none;
-    text-transform:uppercase;
+/*    text-transform:uppercase;*/
     background-color: transparent;
 }
