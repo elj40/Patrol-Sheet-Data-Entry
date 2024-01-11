@@ -97,7 +97,7 @@ function next_x(pos){
 	x=pos.x;y=pos.y;table=pos.table;
 	let ny = y+1
 	let nx = x
-	while (table.children[ny].children[nx].innerText.length < 5) {
+	while (table.children[ny].children[nx].innerText.length < 1) {
 		nx--
 		if (nx<0) {
 			nx = 0
