@@ -21,13 +21,13 @@ function createNewSheet() {
     back_table.innerHTML = ""
     front_table.innerHTML = ""
 
-    let data = loadCSV();
-    let parsed_data = parseCSV(data.content);
-    createTable(back_table, parsed_data, data.style);
+    let data = NYA_BACK_CSV;
+    let parsed_data = parseCSV(data);
+    createTable(back_table, parsed_data, NYA_BACK_STYLE);
 
-    data = loadCSV("nyamvu_front");
-    parsed_data = parseCSV(data.content);
-    createTable(front_table,parsed_data, data.style);
+    data = NYA_FRONT_CSV;
+    parsed_data = parseCSV(data);
+    createTable(front_table,parsed_data, NYA_FRONT_STYLE);
 }
 
 function createTable(table,data,style) {
@@ -40,8 +40,8 @@ function createTable(table,data,style) {
             let td = document.createElement("td");
 
             if (col.length > 0) td.innerHTML = col;
-            else td.innerHTML = '<input type="text"class="cell-input" placeholder="'+c.toString()+'_'+r.toString()+'">'
-            //else td.innerHTML = '<input type="text"class="cell-input">'
+            //else td.innerHTML = '<input type="text"class="cell-input" placeholder="'+c.toString()+'_'+r.toString()+'">'
+            else td.innerHTML = '<input type="text"class="cell-input">'
 
             //Style td
             if (r in style.rows) styleElement(td, style.rows[r]);
@@ -57,6 +57,10 @@ function createTable(table,data,style) {
     }
 
 }
+
+
+
+ 
 function updateDates(el) {
 	let pos = getCurrentPosition(el)
 	let line = pos.table.children[pos.y].children
@@ -72,7 +76,7 @@ function updateDates(el) {
 		new_date = month+'/'+day+'/'+year
 
 		front_table.children[pos.y].children[i].firstChild.value=new_date
-		back_table.children[30+i].children[0].innerHTML= new_date
+		back_table.children[35+i].children[0].innerHTML= new_date
 		day++	
 		date = month+'/'+day+'/'+year
 
@@ -80,16 +84,14 @@ function updateDates(el) {
 }
 
 
-function getCurrentPosition(e) {
-    let col = e.parentElement;
-    let row = col.parentElement;
-    let table = row.parentElement;
-
-    return {
-        x: Array.prototype.indexOf.call(row.children, col),
-        y: Array.prototype.indexOf.call(table.children, row),
-        table: table
+function styleElement(el, style) {
+    if ('content' in style) el.innerHTML = style.content;
+    if ("attributes" in style) {
+        for (let key in style.attributes) {
+            el.setAttribute(key, style.attributes[key]);
+        }
+    }
+    for (let key in style.style) {
+        el.style[key] = style.style[key];
     }
 }
-
-
