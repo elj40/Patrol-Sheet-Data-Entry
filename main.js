@@ -59,53 +59,7 @@ function createTable(table,data,style) {
 }
 
 
-function getCurrentPosition(e) {
-    let col = e.parentElement;
-    let row = col.parentElement;
-    let table = row.parentElement;
 
-    return {
-        x: Array.prototype.indexOf.call(row.children, col),
-        y: Array.prototype.indexOf.call(table.children, row),
-        table: table
-    }
-}
-
-function arrowTraverse(e) {
-        let current = getCurrentPosition(document.activeElement);
-
-        let next = {x: current.x, y: current.y}
-        if (e.keyCode==37) next.x--;    //left
-        if (e.keyCode==38) next.y--;    //top
-        if (e.keyCode==39) next.x++;    //right
-        if (e.keyCode==40) next.y++;    //down
-	if (e.keyCode==13) next = next_x(current)
-
-	next_cell =current.table.children[next.y].children[next.x] 
-	
-        //move focus to next cell
-        try {
-		if (e.shiftKey)next_cell.firstChild.value = document.activeElement.value;
-		next_cell.firstChild.focus();
-
-	}
-        catch (TypeError) {}
-
-}
-
-function next_x(pos){
-	x=pos.x;y=pos.y;table=pos.table;
-	let ny = y+1
-	let nx = x
-	while (table.children[ny].children[nx].innerText.length < 1) {
-		nx--
-		if (nx<0) {
-			nx = 0
-			ny++
-		}
-	}
-	return {x: nx+1, y: ny}
-}
  
 function updateDates(el) {
 	let pos = getCurrentPosition(el)
