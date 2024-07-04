@@ -4,18 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patrol Reader | Elias Joubert</title>
-    <script src="csv_script.js"></script>
     <script src="js_styles.js"></script>
+    <script src="data/NYA_BACK_CSV.js"></script>
+    <script src="data/NYA_FRONT_CSV.js"></script>
+    <script src="csv_script.js"></script>
     <script src="rules.js"></script>
     <script src="rearrange.js"></script>
+    <script src="traversal.js"></script>
+    <script src="utils.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <nav>
-        <img src="logo.jpg" alt="indi eco logo" class="logo">
-        <h1>NYAMVU</h1>
-        <button id="new">New</button>
-        <button id="save">Save</button>
+	<div class="nav-left nav-section">
+		<img src="logo.jpg" alt="indi eco logo" class="logo">
+		<h1>NYAMVU</h1>
+		<button id="new">New</button>
+		<button id="save">Save</button>
+	</div>
+	<div class="nav-right nav-section ai-container">
+		<span id="ai-mode">Manual Entry</span>
+	</div>
     </nav>
     <main>
         <div class="page front">
@@ -32,6 +41,6 @@
         </div>
         
     </main>
-    <script src="script.js"></script>
+    <script src="main.js"></script>
 </body>
 </html>

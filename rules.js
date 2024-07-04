@@ -1,7 +1,7 @@
 const gridRegex = /[a-zA-Z][0-9]{1,}/;
 const countRegex = /\d{1,}/;
 const dateRegex = /[0-3][0-9]\/[0-3][0-9]\/[0-9]{4}/;
-const wordRegex = /\w{4,}/;
+const wordRegex = /\w{6,}/;
 
 console.log("Rules are here")
 function validate_patrol(p, c, table, tableEl = back_table) {
