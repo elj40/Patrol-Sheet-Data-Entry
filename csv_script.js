@@ -115,7 +115,7 @@ function getDataStyle(loc) {
 }
 
 function getData(loc) {
-    let input = "<input type='text'class='cell-input'>";
+    let input_num = "<input type='number'class='cell-input'>";
     let input_date = '<input type="text"class="cell-input" onchange="updateDates(this)" placeholder="mm/dd/yyyy">';
     switch (loc) {
         case "nyamvu_back": 
@@ -167,7 +167,7 @@ function getData(loc) {
             Scout 4;;;;;;;
             Scout 5;;;;;;;
             Scout 6;;;;;;;
-            M'vula?;${input}mm;${input}mm;${input}mm;${input}mm;${input}mm;${input}mm;${input}mm
+            M'vula? (mm);${input_num};${input_num};${input_num};${input_num};${input_num};${input_num};${input_num}
             Incident Report No.;;;;;;;
             Nyama zina?;;;;;;;
             ;;;;;;;

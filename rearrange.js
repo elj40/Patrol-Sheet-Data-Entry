@@ -13,7 +13,9 @@ function createReports(front,back) {
     const animal = createAnimalReport(front_p,back_p);
     const patrol = createPatrolReport(front_p,back_p);
     const carcass = createYafaReport(front_p);
+    const rainfall = createRainfallReport(front_p);
 
+    download(rainfall, report_data.sheet_id+"_rainfall.csv", "text/plain");
     download(animal, report_data.sheet_id+"_animal.csv", "text/plain");
     download(patrol, report_data.sheet_id+"_patrol.csv", "text/plain");
     download(carcass, report_data.sheet_id+"_carcass.csv", "text/plain");
@@ -145,6 +147,16 @@ function createYafaReport(fp) {
         csv += "\n";
     }
     return csv;
+}
+
+function createRainfallReport(fp) {
+	csv = "";
+	for (let i=1; i<=7; i++) {
+		csv += fp[1][i]+';';
+		if (fp[8][i].trim() == '') csv += '0\n';
+		else csv += fp[8][i]+'\n';
+	}
+	return csv
 }
 
 
