@@ -45,9 +45,9 @@ function nyamvuStyleFront(){
             "0_2": {style: {borderBottom: "none"}},
             "0_3": {style: {borderBottom: "none"}},
             "0_4": {style: {borderBottom: "none"}},
-            "0_8": {style: {borderBottom: "none"}},
             "0_9": {style: {borderBottom: "none"}},
             "0_10": {style: {borderBottom: "none"}},
+            "0_11": {style: {borderBottom: "none"}},
         }
     }
 }

@@ -113,7 +113,7 @@ function getSpeciePositions(table, limit=34) {
     return pos;
 }
 
-//SheetID, Call_Sign, patrolDate, numGridBlock(1), gridCode, patrolType(Foot patrol), Scout1, Scout2, Scout3, Scout4, Scout5, Scout6
+//SheetIID, Call_Sign, patrolDate, numGridBlock(1), gridCode, patrolType(Foot patrol), Scout1, Scout2, Scout3, Scout4, Scout5, Scout6
 function createPatrolReport(fp,bp) {
     csv = "Sheet_ID;Call_Sign;patrolDate;numGridBlock;gridCode;patrolType;Scout1;Scout2;Scout3;Scout4;Scout5;Scout6"
     csv+="\n";

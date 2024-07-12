@@ -61,7 +61,7 @@ function createTable(table,data,style) {
 }
 
 function toggleDebug() {
-	debug_mode = !debug_mode 
+	debug_mode = !debugMode;
 	setup();
 }
 
