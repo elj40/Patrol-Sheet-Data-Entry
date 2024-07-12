@@ -11,9 +11,12 @@ function createReports(front,back) {
     report_data.person = front_p[0][3];
     report_data.sheet_id = front_p[0][7];
     report_data.date = front_p[1][1];
+
     const animal = createAnimalReport(front_p,back_p);
     const patrol = createPatrolReport(front_p,back_p);
-    const carcass = createYafaReport(front_p);
+	const weather = createWeatherReport(front_p);
+	const interest = createInterestReport(front_p);
+	const carcass = createCarcassReport(front_p);
 
     download(animal, report_data.sheet_id+"_animal.csv", "text/plain");
     download(patrol, report_data.sheet_id+"_patrol.csv", "text/plain");
@@ -60,7 +63,7 @@ function getAnimalData(fp,bp) {
 
         species.push(info);
     }
-
+	//CONSTANTS!
     species.push(getSpecieData(parseArea(bp,1,32,50,1)));  //hartebeest
 
     species.push(getSpecieData(parseArea(bp,19,22,50,1)));  //crested
@@ -102,7 +105,7 @@ function getSpecieData(specie) {
 
     return data;
 }
-
+//CONSTANTS!
 function getSpeciePositions(table, limit=34) {
     let pos = [];
     //console.log(table);
@@ -118,10 +121,9 @@ function createPatrolReport(fp,bp) {
     csv = "Sheet_ID;Call_Sign;patrolDate;numGridBlock;gridCode;patrolType;Scout1;Scout2;Scout3;Scout4;Scout5;Scout6"
     csv+="\n";
     for (let i = 0; i<7; i++) {
-        const patrol = parseArea(bp,1,36+i,50,1);
+        const patrol = parseArea(bp,1,36+i,50,1); //CONSTANTS!
         if (patrol.data[0].trim() == "") continue;
 
-        const which_scouts = parseArea(fp,1+i,1,1,7);
         for (let cell of patrol.data) {
             if (cell.trim()=="") continue;
             csv+=report_data.sheet_id+";"  //Sheet_Id
@@ -130,9 +132,7 @@ function createPatrolReport(fp,bp) {
             csv+= "1;"              //numGridBlock
             csv+=cell+";"           //gridcode
             csv+="Foot Patrol;"     //patrolType
-            which_scouts.data.forEach((scout)=>{
-                csv += scout+";"    //Scouts 1-6
-            })
+			csv+= report_data.person + ';'; //Main Scout (only one for sango)
             csv+="\n";               //New line
         }
 
@@ -152,6 +152,54 @@ function createYafaReport(fp) {
         csv += "\n";
     }
     return csv;
+}
+
+function createWeatherReport(fp) {
+	csv = "Date;Rainfall;Morning;Noon;Evening\n"
+
+	for (let i = 1; i <= 7 ; i++) { //CONSTANTS!
+			csv += fp[1][i] + ';';			//Date
+			csv += fp[7][i] + ';';			//Rainfall
+			weather = fp[6][i].split();
+			csv += weather[0] + ';'; 		//Weather Morning
+			csv += weather[1] + ';'; 		//Weather Noon
+			csv += weather[2]; 				//Weather Evening
+			csv += '\n';
+	}
+
+	return csv;
+
+}
+
+function createInterestReport(fp) {
+	csv = 'Date;Animal of interest;Number seen\n';
+	
+	for (let i = 1; i <= 7; i++) {
+		animals = parseArea(i,2,1,4); //CONSTANTS!
+		for (let a of animals.data) {
+			if (a.trim() == '') continue;
+			csv += fp[1][i] + ';';
+			const [animal, count] = a.split();
+			csv += animal+';';
+			csv += count;
+			csv += '\n';
+		}
+	}
+	
+	return csv;
+}
+
+function createCarcassReport(fp) {
+	csv = 'Date;Carcass Type;Age Class;Reason\n';
+	for (let i = 1; i <= 7; i++) {
+		csv += fp[1][i];
+		const [carcass, age, reason] = fp[6][i].trim().split();
+		csv += carcass + ';';
+		csv += age+';';
+		csv += reason;
+		csv += '\n';
+	}
+	return csv;
 }
 
 
