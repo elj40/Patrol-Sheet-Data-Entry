@@ -159,15 +159,18 @@ function createYafaReport(fp) {
 }
 
 function createWeatherReport(fp) {
+	const conditions = ["Clear", "Quarter_Cloudy", "Half_Cloudy", "Three_Quarter_Cloudy", "Full_Cloud", "Rain", "Hard_Rain"]
 	csv = "Date;Rainfall;Morning;Noon;Evening\n"
 
 	for (let i = 1; i <= 7 ; i++) { //CONSTANTS!
 			csv += fp[1][i] + ';';			//Date
 			csv += fp[7][i] + ';';			//Rainfall
-			weather = fp[6][i].split(' ');
-			csv += weather[0] + ';'; 		//Weather Morning
-			csv += weather[1] + ';'; 		//Weather Noon
-			csv += weather[2]; 				//Weather Evening
+			weather = [];
+			if (fp[6][i].length == 0) weather = [1,1,1];
+			else weather = fp[6][i].match(/\b\w+\b/g).map(n => parseInt(n));
+			csv += conditions[weather[0]] + ';'; 		//Weather Morning
+			csv += conditions[weather[1]] + ';'; 		//Weather Noon
+			csv += conditions[weather[2]]; 				//Weather Evening
 			csv += '\n';
 	}
 

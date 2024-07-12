@@ -78,31 +78,44 @@ function validate_back_dates(c, table, tableEl = back_table) {
 //CONSTANTS!
 function validate_front(cell, table, tableEl = front_table) {
 	let c = cell;
-    let cPos = c.toString();
-    if (c[1] >= table.length)  return true;
+	const [x, y] = cell;
+    const cPos = c.toString();
+    if (y >= table.length)  return true;
     try {
 
 
-        let current = table[c[1]][c[0]].toUpperCase().trim();
-
-        if (c[1] == 1 && c[0] >= 1) {
+        let current = table[y][x].toUpperCase().trim();
+		
+		//Dates
+        if (y == 1 && x >= 1) {
             if (!current.match(dateRegex) && !current.length == 0) {
                 alert(current + " found at " + cPos + ",\nDate expected as mm/dd/yyyy");
                 focus_cell(c, tableEl);
             }
         }
 
-		if (c[1]==6 && c[0] >= 1) {
+		//Animals of interest
+		if (y>=2 && y<=5 && current.length > 0 && x>0) {
 				words = current.match(/\b\w+\b/g);
-				all_nums = words.every(s => !isNaN(s));
-				if (words.length != 3 || !all_nums) {
-						alert(current + ' found at ' + cPos +',\nWeather expected as: [morning] [noon] [evening]\n e.g. 2 3 6');
+				if (words.length != 2 || isNaN(words[1])) {
+						alert(current + " found at " + cPos + ",\nFormat expected as: [animal] [count]\ne.g. Pangolin 1");
 						focus_cell(c, tableEl);
 				}
 		}
 
-        if (c[0] == table[c[1]].length - 1) return validate_front([0, c[1] + 1], table, tableEl);
-        else return validate_front([c[0] + 1, c[1]], table, tableEl);
+		
+		//Weather
+		if (y==6 && x >= 1 && current.length > 0) {
+				words = current.match(/\b\w+\b/g);
+				all_nums = words.every(s => !isNaN(s));
+				if (words.length != 3 || !all_nums) {
+						alert(current + ' found at ' + cPos +',\nWeather expected as: [morning] [noon] [evening]\n e.g.2 3 6');
+						focus_cell(c, tableEl);
+				}
+		}
+
+        if (x == table[y].length - 1) return validate_front([0, y + 1], table, tableEl);
+        else return validate_front([x + 1, y], table, tableEl);
 
     } catch (err) {
         console.log(cPos)
