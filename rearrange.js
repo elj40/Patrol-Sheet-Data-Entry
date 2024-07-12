@@ -17,10 +17,14 @@ function createReports(front,back) {
 	const weather = createWeatherReport(front_p);
 	const interest = createInterestReport(front_p);
 	const carcass = createCarcassReport(front_p);
-
-    download(animal, report_data.sheet_id+"_animal.csv", "text/plain");
-    download(patrol, report_data.sheet_id+"_patrol.csv", "text/plain");
-    download(carcass, report_data.sheet_id+"_carcass.csv", "text/plain");
+	
+	if (!debug_mode) {
+			download(animal, report_data.sheet_id+"_animal.csv", "text/plain");
+			download(patrol, report_data.sheet_id+"_patrol.csv", "text/plain");
+			download(weather, report_data.sheet_id+"_weather.csv", "text/plain");
+			download(interest, report_data.sheet_id+"_interst.csv", "text/plain");
+			download(carcass, report_data.sheet_id+"_carcass.csv", "text/plain");
+	}
 
 }
 //Sheet_ID, Call_Sign, Person, Department-, ReportDate, GridCode,Species, Quantity, Status(default:Sighting)
@@ -160,7 +164,7 @@ function createWeatherReport(fp) {
 	for (let i = 1; i <= 7 ; i++) { //CONSTANTS!
 			csv += fp[1][i] + ';';			//Date
 			csv += fp[7][i] + ';';			//Rainfall
-			weather = fp[6][i].split();
+			weather = fp[6][i].split(' ');
 			csv += weather[0] + ';'; 		//Weather Morning
 			csv += weather[1] + ';'; 		//Weather Noon
 			csv += weather[2]; 				//Weather Evening
@@ -179,7 +183,7 @@ function createInterestReport(fp) {
 		for (let a of animals.data) {
 			if (a.trim() == '') continue;
 			csv += fp[1][i] + ';';
-			const [animal, count] = a.split();
+			const [animal, count] = a.split(' ');
 			csv += animal+';';
 			csv += count;
 			csv += '\n';
@@ -190,14 +194,15 @@ function createInterestReport(fp) {
 }
 
 function createCarcassReport(fp) {
-	csv = 'Date;Carcass Type;Age Class;Reason\n';
+	csv = 'Date;Carcass Info\n';
 	for (let i = 1; i <= 7; i++) {
-		csv += fp[1][i];
-		const [carcass, age, reason] = fp[6][i].trim().split();
-		csv += carcass + ';';
-		csv += age+';';
-		csv += reason;
-		csv += '\n';
+		carcass_info = parseArea(i,8,1,3); //CONSTANTS!
+		
+		for (let carcass of carcass_info.data) {
+				csv += fp[1][i];
+				csv += carcass + ';';
+				csv += '\n';
+		}
 	}
 	return csv;
 }

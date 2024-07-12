@@ -75,9 +75,10 @@ function validate_back_dates(c, table, tableEl = back_table) {
     }
 
 }
-
-function validate_front(c, table, tableEl = front_table) {
-    let cpos = c.toString();
+//CONSTANTS!
+function validate_front(cell, table, tableEl = front_table) {
+	let c = cell;
+    let cPos = c.toString();
     if (c[1] >= table.length)  return true;
     try {
 
@@ -86,16 +87,25 @@ function validate_front(c, table, tableEl = front_table) {
 
         if (c[1] == 1 && c[0] >= 1) {
             if (!current.match(dateRegex) && !current.length == 0) {
-                alert(current + " found at " + cpos + ",\nDate expected as mm/dd/yyyy");
+                alert(current + " found at " + cPos + ",\nDate expected as mm/dd/yyyy");
                 focus_cell(c, tableEl);
             }
         }
+
+		if (c[1]==6 && c[0] >= 1) {
+				words = current.match(/\b\w+\b/g);
+				all_nums = words.every(s => !isNaN(s));
+				if (words.length != 3 || !all_nums) {
+						alert(current + ' found at ' + cPos +',\nWeather expected as: [morning] [noon] [evening]\n e.g. 2 3 6');
+						focus_cell(c, tableEl);
+				}
+		}
 
         if (c[0] == table[c[1]].length - 1) return validate_front([0, c[1] + 1], table, tableEl);
         else return validate_front([c[0] + 1, c[1]], table, tableEl);
 
     } catch (err) {
-        console.log(cpos)
+        console.log(cPos)
         throw err;
     }
 }
