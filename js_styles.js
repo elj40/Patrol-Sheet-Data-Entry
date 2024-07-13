@@ -13,7 +13,6 @@ function nyamvuStyleBack() {
             "0_2": {style: {borderBottom: "none"}},
             "0_4": {style: {borderBottom: "none"}},
             "0_6": {style: {borderBottom: "none"}},
-            "0_12": {style: {borderBottom: "none"}},
             "0_14": {style: {borderBottom: "none"}},
             "16_21": {attributes: {colspan: "3"}, style: {outline: "solid 1px black"}},
             "16_20": {attributes: {colspan: "3"}, style: {outline: "solid 1px black"}},

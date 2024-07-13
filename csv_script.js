@@ -65,7 +65,8 @@ function stringifyCell(cell) {
     let bracketRegex = /\(.*\)/
     let s = ""
 
-    let text = cell.innerText.trim().match(bracketRegex);
+    let text = cell.innerText.toUpperCase();
+	text = text.trim().match(bracketRegex);
 
     if (cell.hasAttribute("colspan")) {
         for (let i = 0; i < cell.getAttribute("colspan")-1; i++) {
