@@ -84,7 +84,7 @@ function updateDates(el) {
 		new_date = month+'/'+day+'/'+year
 
 		front_table.children[pos.y].children[i].firstChild.value=new_date
-		back_table.children[35+i].children[0].innerHTML= new_date
+		back_table.children[31+i].children[0].innerHTML= new_date //CONSTANTS!
 		day++	
 		date = month+'/'+day+'/'+year
 

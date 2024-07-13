@@ -12,15 +12,14 @@ function createReports(front,back) {
     report_data.sheet_id = front_p[0][7];
     report_data.date = front_p[1][1];
 
-    //const animal = createAnimalReport(front_p,back_p);
-    //const patrol = createPatrolReport(front_p,back_p);
+    const animal = createAnimalReport(front_p,back_p);
+    const patrol = createPatrolReport(front_p,back_p);
 	const weather = createWeatherReport(front_p);
 	const interest = createInterestReport(front_p);
 	const carcass = createCarcassReport(front_p);
 	
-	console.log(weather);
-	console.log(interest);
-	console.log(carcass);
+	console.log(animal);
+	console.log(patrol);
 	
 	if (!debug_mode) {
 			download(animal, report_data.sheet_id+"_animal.csv", "text/plain");
@@ -72,18 +71,15 @@ function getAnimalData(fp,bp) {
         species.push(info);
     }
 	//CONSTANTS!
-    species.push(getSpecieData(parseArea(bp,1,32,50,1)));  //hartebeest
-
-    species.push(getSpecieData(parseArea(bp,19,22,50,1)));  //crested
-    species.push(getSpecieData(parseArea(bp,17,23,50,1)));  //helmeted
-    species.push(getSpecieData(parseArea(bp,17,24,50,1)));  //mngomba
-    
-    species.push(getSpecieData(parseArea(bp,23,27,50,1)));  //kandwe
-    species.push(getSpecieData(parseArea(bp,23,28,50,1)));  //kaingo
-    species.push(getSpecieData(parseArea(bp,23,29,50,1)));  //kalamo
-    species.push(getSpecieData(parseArea(bp,23,30,50,1)));  //nimbulu
-    species.push(getSpecieData(parseArea(bp,23,31,50,1)));  //chimwi
-    species.push(getSpecieData(parseArea(bp,23,32,50,1)));  //fungofungo
+    species.push(getSpecieData(parseArea(bp,19,20,50,1)));  //Hange
+    species.push(getSpecieData(parseArea(bp,19,21,50,1)));  //Mariti
+		
+    species.push(getSpecieData(parseArea(bp,23,25,50,1)));  //Dzere
+    species.push(getSpecieData(parseArea(bp,23,26,50,1)));  //Ingwe
+    species.push(getSpecieData(parseArea(bp,23,27,50,1)));  //Shumba
+    species.push(getSpecieData(parseArea(bp,23,28,50,1)));  //Bere
+    species.push(getSpecieData(parseArea(bp,23,29,50,1)));  //Dindingwe
+	
     
     return {dates: dates, sightings: species};
 }
@@ -126,10 +122,10 @@ function getSpeciePositions(table, limit=34) {
 
 //SheetID, Call_Sign, patrolDate, numGridBlock(1), gridCode, patrolType(Foot patrol), Scout1, Scout2, Scout3, Scout4, Scout5, Scout6
 function createPatrolReport(fp,bp) {
-    csv = "Sheet_ID;Call_Sign;patrolDate;numGridBlock;gridCode;patrolType;Scout1;Scout2;Scout3;Scout4;Scout5;Scout6"
+    csv = "Sheet_ID;Call_Sign;patrolDate;numGridBlock;gridCode;patrolType;Scout"
     csv+="\n";
     for (let i = 0; i<7; i++) {
-        const patrol = parseArea(bp,1,36+i,50,1); //CONSTANTS!
+        const patrol = parseArea(bp,1,32+i,50,1); //CONSTANTS!
         if (patrol.data[0].trim() == "") continue;
 
         for (let cell of patrol.data) {
@@ -140,7 +136,7 @@ function createPatrolReport(fp,bp) {
             csv+= "1;"              //numGridBlock
             csv+=cell+";"           //gridcode
             csv+="Foot Patrol;"     //patrolType
-			csv+= report_data.person + ';'; //Main Scout (only one for sango)
+			csv+= report_data.person; //Main Scout (only one for sango)
             csv+="\n";               //New line
         }
 
