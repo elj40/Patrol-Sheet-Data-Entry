@@ -29,6 +29,7 @@ function createNewSheet() {
 
     data = NYA_FRONT_CSV;
     parsed_data = parseCSV(data);
+	console.log(parsed_data);
     createTable(front_table,parsed_data, NYA_FRONT_STYLE);
 }
 

@@ -110,8 +110,15 @@ function validate_front(cell, table, tableEl = front_table) {
 		if (y==6 && x >= 1 && current.length > 0) {
 				words = current.match(/\b\w+\b/g);
 				all_nums = words.every(s => !isNaN(s));
+				
 				if (words.length != 3 || !all_nums) {
 						alert(current + ' found at ' + cPos +',\nWeather expected as: [morning] [noon] [evening]\n e.g.2 3 6');
+						focus_cell(c, tableEl);
+						return false;
+				}
+				all_in_range = words.map(n => parseInt(n)).every(n => n >=0 && n <= 7);
+				if (!all_in_range) {
+						alert(current + ' found at ' + cPos +',\nWeather can only be values between 1 and 7');
 						focus_cell(c, tableEl);
 						return false;
 				}
