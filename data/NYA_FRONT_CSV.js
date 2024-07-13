@@ -6,7 +6,7 @@ const NYA_FRONT_CSV = `Call sign:;;Name:;;Sheet no.;
             ;;;;;;;
             ;;;;;;;
             Mamiriro ekunze?;;;;;;;
-            Mvura?;${input}mm;${input}mm;${input}mm;${input}mm;${input}mm;${input}mm;${input}mm
+            Mvura? (mm);${input};${input};${input};${input};${input};${input};${input}
             Muka dzakafa;;;;;;;
             ;;;;;;;
             ;;;;;;;

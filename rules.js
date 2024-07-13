@@ -87,10 +87,11 @@ function validate_front(cell, table, tableEl = front_table) {
         let current = table[y][x].toUpperCase().trim();
 		
 		//Dates
-        if (y == 1 && x >= 1) {
-            if (!current.match(dateRegex) && !current.length == 0) {
+        if (y == 1 && x >= 1 && !debug_mode) {
+            if (!current.match(dateRegex) || current.length == 0) {
                 alert(current + " found at " + cPos + ",\nDate expected as mm/dd/yyyy");
                 focus_cell(c, tableEl);
+				return false;
             }
         }
 
@@ -100,6 +101,7 @@ function validate_front(cell, table, tableEl = front_table) {
 				if (words.length != 2 || isNaN(words[1])) {
 						alert(current + " found at " + cPos + ",\nFormat expected as: [animal] [count]\ne.g. Pangolin 1");
 						focus_cell(c, tableEl);
+						return false;
 				}
 		}
 
@@ -111,6 +113,7 @@ function validate_front(cell, table, tableEl = front_table) {
 				if (words.length != 3 || !all_nums) {
 						alert(current + ' found at ' + cPos +',\nWeather expected as: [morning] [noon] [evening]\n e.g.2 3 6');
 						focus_cell(c, tableEl);
+						return false;
 				}
 		}
 

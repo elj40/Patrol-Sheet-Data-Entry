@@ -12,11 +12,15 @@ function createReports(front,back) {
     report_data.sheet_id = front_p[0][7];
     report_data.date = front_p[1][1];
 
-    const animal = createAnimalReport(front_p,back_p);
-    const patrol = createPatrolReport(front_p,back_p);
+    //const animal = createAnimalReport(front_p,back_p);
+    //const patrol = createPatrolReport(front_p,back_p);
 	const weather = createWeatherReport(front_p);
 	const interest = createInterestReport(front_p);
 	const carcass = createCarcassReport(front_p);
+	
+	console.log(weather);
+	console.log(interest);
+	console.log(carcass);
 	
 	if (!debug_mode) {
 			download(animal, report_data.sheet_id+"_animal.csv", "text/plain");
@@ -160,17 +164,17 @@ function createYafaReport(fp) {
 
 function createWeatherReport(fp) {
 	const conditions = ["Clear", "Quarter_Cloudy", "Half_Cloudy", "Three_Quarter_Cloudy", "Full_Cloud", "Rain", "Hard_Rain"]
-	csv = "Date;Rainfall;Morning;Noon;Evening\n"
+	csv = "Date;Rainfall (mm);Morning;Noon;Evening\n"
 
 	for (let i = 1; i <= 7 ; i++) { //CONSTANTS!
 			csv += fp[1][i] + ';';			//Date
 			csv += fp[7][i] + ';';			//Rainfall
 			weather = [];
-			if (fp[6][i].length == 0) weather = [1,1,1];
+			if (fp[6][i].trim().length == 0) weather = [1,1,1];
 			else weather = fp[6][i].match(/\b\w+\b/g).map(n => parseInt(n));
-			csv += conditions[weather[0]] + ';'; 		//Weather Morning
-			csv += conditions[weather[1]] + ';'; 		//Weather Noon
-			csv += conditions[weather[2]]; 				//Weather Evening
+			csv += conditions[weather[0]-1] + ';'; 		//Weather Morning
+			csv += conditions[weather[1]-1] + ';'; 		//Weather Noon
+			csv += conditions[weather[2]-1]; 				//Weather Evening
 			csv += '\n';
 	}
 
@@ -182,7 +186,7 @@ function createInterestReport(fp) {
 	csv = 'Date;Animal of interest;Number seen\n';
 	
 	for (let i = 1; i <= 7; i++) {
-		animals = parseArea(i,2,1,4); //CONSTANTS!
+		animals = parseArea(fp,i,1,1,5); //CONSTANTS!
 		for (let a of animals.data) {
 			if (a.trim() == '') continue;
 			csv += fp[1][i] + ';';
@@ -199,12 +203,13 @@ function createInterestReport(fp) {
 function createCarcassReport(fp) {
 	csv = 'Date;Carcass Info\n';
 	for (let i = 1; i <= 7; i++) {
-		carcass_info = parseArea(i,8,1,3); //CONSTANTS!
+		carcass_info = parseArea(fp,i,7,1,4); //CONSTANTS!
 		
 		for (let carcass of carcass_info.data) {
-				csv += fp[1][i];
-				csv += carcass + ';';
-				csv += '\n';
+			if (carcass.trim() == '') continue;
+			csv += fp[1][i] + ';';
+			csv += carcass;
+			csv += '\n';
 		}
 	}
 	return csv;

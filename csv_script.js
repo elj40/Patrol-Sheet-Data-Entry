@@ -74,7 +74,7 @@ function stringifyCell(cell) {
     }
 
     if (text != null) s+= text[0].slice(1,-1);
-    else s+= cell.innerText;
+    else s+= cell.innerText.trim();
 
 
     if (cell.firstElementChild) {
