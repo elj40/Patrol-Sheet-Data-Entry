@@ -5,7 +5,7 @@ const wordRegex = /\w{6,}/;
 
 console.log("Rules are here")
 function validate_patrol(p, c, table, tableEl = back_table) {
-    if (c[1] >= 34)  return true;
+    if (c[1] >= 30)  return true;								//CONSTANTS!
     let prev = table[p[1]][p[0]].toUpperCase().trim();
     let current = table[c[1]][c[0]].toUpperCase().trim();
     let cpos = c.toString();
@@ -48,7 +48,7 @@ function validate_back_dates(c, table, tableEl = back_table) {
 
         //console.log(current, cpos, current.length);
         if (c[0] == 0) {
-            if (!current.match(dateRegex) && !current.length == 0) {
+            if (!current.match(dateRegex) || current.length == 0) {
                 alert(current + " found\n" + "Expected mm/dd/yyyy at " + cpos);
                  return false;
             }
