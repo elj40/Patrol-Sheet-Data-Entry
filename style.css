@@ -67,12 +67,25 @@ main {
     padding: 1rem;
 }
 
+#nav-main-spacer {
+	width:100%;
+	height: 6rem;
+}
+
+#help-main {
+	margin: auto;
+	max-width: 800px;
+	background-color: var(--faint-white);
+	padding: 3rem;
+}
+
 .page {
     width: 100%;
     background-color: var(--faint-white);
     padding-top: 1px;
-    padding-bottom: 1px;
+    padding-bottom: 1px;    
     margin-top: 1rem;
+    
 }
 
 .front {
@@ -117,4 +130,8 @@ td:focus-within {
     outline: none;
 /*    text-transform:uppercase;*/
     background-color: transparent;
+}
+
+h2,h3 {
+	margin-top: 0.8rem;
 }
