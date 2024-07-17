@@ -25,7 +25,7 @@ function createReports(front,back) {
 			download(animal, report_data.sheet_id+"_animal.csv", "text/plain");
 			download(patrol, report_data.sheet_id+"_patrol.csv", "text/plain");
 			download(weather, report_data.sheet_id+"_weather.csv", "text/plain");
-			download(interest, report_data.sheet_id+"_interst.csv", "text/plain");
+			download(interest, report_data.sheet_id+"_interest.csv", "text/plain");
 			download(carcass, report_data.sheet_id+"_carcass.csv", "text/plain");
 	}
 
