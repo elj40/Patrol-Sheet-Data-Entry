@@ -4,12 +4,15 @@ const front_table = document.getElementById("front");
 const save_btn = document.getElementById("save");
 const new_btn = document.getElementById("new");
 
-var debug_mode = true
+var debug_mode = false;
 
 window.onload = ()=>{setup()}
 
 function setup() {
     console.log("Running")
+
+    document.getElementById("debug-warning").style.display =
+        debug_mode ? "block" : "none";
     createNewSheet();
 
     back_table.addEventListener("keydown", arrowTraverse);

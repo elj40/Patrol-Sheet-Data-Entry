@@ -51,6 +51,10 @@ nav h1 {
   /*  padding-top:1rem;*/
 }
 
+nav #debug-warning {
+    color: red;
+}
+
 nav button {
     color: var(--faint-white);
 
