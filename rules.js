@@ -49,7 +49,7 @@ function validate_back_dates(c, table, tableEl = back_table) {
         //console.log(current, cpos, current.length);
         if (c[0] == 0) {
             if (!current.match(dateRegex) || current.length == 0) {
-                alert(current + " found\n" + "Expected mm/dd/yyyy at " + cpos);
+                alert(current + " found\n" + "Expected dd/mm/yyyy at " + cpos);
                  return false;
             }
         } else {
@@ -89,7 +89,7 @@ function validate_front(cell, table, tableEl = front_table) {
 		//Dates
         if (y == 1 && x >= 1 && !debug_mode) {
             if (!current.match(dateRegex) || current.length == 0) {
-                alert(current + " found at " + cPos + ",\nDate expected as mm/dd/yyyy");
+                alert(current + " found at " + cPos + ",\nDate expected as dd/mm/yyyy");
                 focus_cell(c, tableEl);
 				return false;
             }

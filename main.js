@@ -79,17 +79,17 @@ function updateDates(el) {
 	for (let i = pos.x; i<line.length; i++) {
 		let a = i-pos.x 
 		
-		let [ month, day, year ] = date.split('/').map((x)=>parseInt(x))
+		let [ day, month, year ] = date.split('/').map((x)=>parseInt(x))
 
 		if (day>31) {month++; day=1}
 		if (day<10) day="0"+day
 		if (month<10) month="0"+month
-		new_date = month+'/'+day+'/'+year
+		new_date = day+'/'+month+'/'+year
 
 		front_table.children[pos.y].children[i].firstChild.value=new_date
 		back_table.children[31+i].children[0].innerHTML= new_date //CONSTANTS!
 		day++	
-		date = month+'/'+day+'/'+year
+		date = day+'/'+month+'/'+year
 
 	}
 }

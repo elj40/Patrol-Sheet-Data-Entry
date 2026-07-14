@@ -1,4 +1,4 @@
-const input_date = "<input type='text'class='cell-input'onchange='updateDates(this)' placeholder=' MM/DD/YYYY'>"
+const input_date = "<input type='text'class='cell-input'onchange='updateDates(this)' placeholder=' DD/MM/YYYY'>"
 const NYA_BACK_CSV = `Species;B;M;B;M;B;M;B;M;B;M;B;M;B;M;B;M;B;M;B;M;B;M;B;M;B;M;B;M;B;M
             Mhara (Impala);;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
             ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

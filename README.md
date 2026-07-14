@@ -4,7 +4,7 @@ A template for scouts to easily and quickly type in patrol sheet data
 ## How to use
 - Type data in just like it appears on the sheet
 ### Front table
-- Date: Fill in the date that patrol was done on, folllowing dates will be filled automatically (stepping one day at time). Generated dates can be changed manually. Dates must be in format mm/dd/yyyy.
+- Date: Fill in the date that patrol was done on, folllowing dates will be filled automatically (stepping one day at time). Generated dates can be changed manually. Dates must be in format dd/mm/yyyy.
 - Animals of interest: Any animal not listed on the table on the backpage, fill it in as: (animal) (count) e.g. Pangolin 1
 - Mamiriro ekunze: Describes weather in morning, noon and evening using digits 1-7 in the format: (morning) (noon) (evening) e.g. 3 2 7
     - 1 Clear
