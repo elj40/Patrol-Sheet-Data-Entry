@@ -30,9 +30,9 @@ function createReports(front,back) {
 	}
 
 }
-//Sheet_ID, Call_Sign, Person, Department-, ReportDate, GridCode,Species, Quantity, Status(default:Sighting)
+//Sheet_ID, Call_Sign, Person, ReportDate, GridCode,Species, Quantity, Status(default:Sighting)
 function createAnimalReport(fp,bp) {
-    let csv = "Sheet_ID;Call_Sign;Person;Department;ReportDate;GridCode;Species;Quantity;Status\n"
+    let csv = "Sheet_ID;Call_Sign;Person;ReportDate;GridCode;Species;Quantity;Status\n"
     
     let animal_data = getAnimalData(fp,bp);
     
@@ -44,7 +44,6 @@ function createAnimalReport(fp,bp) {
                 csv += report_data.sheet_id + ";";
                 csv += report_data.call_sign + ";";
                 csv += report_data.person + ";";
-                csv += ";";
                 csv += animal_data.dates[i] + ";";
                 csv += sighting.cell + ";";
                 csv += sighting.species + ";";
