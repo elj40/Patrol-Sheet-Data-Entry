@@ -133,13 +133,11 @@ function createPatrolReport(fp,bp) {
             csv+=report_data.call_sign+";" //Call_Sign
             csv+=patrol.name+";"    //patrol_date
             csv+= "1;"              //numGridBlock
-            csv+=cell+";"           //gridcode
+            csv+=cell.toUpperCase()+";"           //gridcode
             csv+="Foot Patrol;"     //patrolType
 			csv+= report_data.person; //Main Scout (only one for sango)
             csv+="\n";               //New line
         }
-
-        
     }
     return csv;
 }
