@@ -17,7 +17,7 @@ function saveCSV() {
 
 function checkForBackErrors(data) {
     let csv = parseCSV(data);
-    return validate_patrol([1,1], [2,1], csv) && validate_back_dates([0,32],csv);
+    return validate_patrol([1,1], [2,1], csv) && validate_back_dates([0,34],csv);
 }
 
 function checkForFrontErrors(data) {
