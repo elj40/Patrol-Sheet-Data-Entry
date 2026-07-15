@@ -58,7 +58,7 @@ function createAnimalReport(fp,bp) {
 }
 
 function getAnimalData(fp,bp) {
-    let spots = getSpeciePositions(bp);
+    let spots = getSpeciePositions(bp, 32);
     let dates = parseArea(fp,1,1,12,1).data;
     let species = [];
 

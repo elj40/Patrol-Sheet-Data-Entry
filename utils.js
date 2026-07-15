@@ -30,24 +30,16 @@ function fillTestData()
     first_date_input_el.value = "11/11/1111";
     updateDates(first_date_input_el);
 
-    getInputByPos(1,1,back_table).value = "a1";
-    getInputByPos(2,1,back_table).value = "1";
+    let rows = [1,4,6,8,9,10,11]
+    let cell_blocks = ['a','b','d','e','f','g','h'].map((c) => c + '1')
 
-    getInputByPos(1,4,back_table).value = "b1";
-    getInputByPos(2,4,back_table).value = "2";
+    console.assert(rows.length == cell_blocks.length, "rows.length == cell_blocks.length");
 
-    getInputByPos(1,6,back_table).value = "c1";
-    getInputByPos(2,6,back_table).value = "3";
+    for (let i = 0; i < rows.length; i++)
+    {
+        getInputByPos(1,rows[i],back_table).value = cell_blocks[i];
+        getInputByPos(2,rows[i],back_table).value = 1 + i;
 
-    getInputByPos(1,8,back_table).value = "d1";
-    getInputByPos(2,8,back_table).value = "4";
-
-    getInputByPos(1,9,back_table).value = "e1";
-    getInputByPos(2,9,back_table).value = "5";
-
-    getInputByPos(1,10,back_table).value = "f1";
-    getInputByPos(2,10,back_table).value = "6";
-
-    getInputByPos(1,11,back_table).value = "g1";
-    getInputByPos(2,11,back_table).value = "7";
+        getInputByPos(1 + i, 34, back_table).value = cell_blocks[i];
+    }
 }
